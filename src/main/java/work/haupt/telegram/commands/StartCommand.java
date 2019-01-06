@@ -1,5 +1,6 @@
 package work.haupt.telegram.commands;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Chat;
@@ -13,7 +14,7 @@ import work.haupt.util.BotConfig;
 public class StartCommand extends BotCommand {
 
     private static final String LOGTAG = "STARTCOMMAND";
-
+    private static BotConfig config = ConfigFactory.create(BotConfig.class);
     public StartCommand() {
         this(Commands.startCommand, "Starts the message feed from the bot.");
     }
@@ -39,8 +40,8 @@ public class StartCommand extends BotCommand {
                     BotLogger.warn(LOGTAG, String.format("%s tried to login with a wrong password: %s", user.getUserName(), arguments[0]));
                 }
 
-                BotConfig.USER_ID = Integer.parseInt(arguments[1]);
-                BotConfig.USERNAME = arguments[2];
+                config.USER_ID = Integer.parseInt(arguments[1]);
+                config.USERNAME = arguments[2];
             }
             catch(NumberFormatException exception)
             {
@@ -51,7 +52,7 @@ public class StartCommand extends BotCommand {
         SendMessage message = new SendMessage();
         message.setChatId(chat.getId());
 
-        if(BotConfig.USER_ID != user.getId())
+        if(config.USER_ID != user.getId())
             message.setText("Please enter your ID (/id) in the configuration to unlock this command.");
         else
             message.setText("Welcome! You've been approved. I will now try to connect to the chat and show you the latest messages. You can get a command list with /help.");

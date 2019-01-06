@@ -1,5 +1,6 @@
 package work.haupt.telegram.commands;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Chat;
@@ -12,6 +13,7 @@ import work.haupt.util.BotConfig;
 public class StopCommand extends BotCommand {
 
     private static final String LOGTAG = "STOPCOMMAND";
+    private static BotConfig config = ConfigFactory.create(BotConfig.class);
 
     public StopCommand() {
         this(Commands.stopCommand, "Stops the message feed from the bot.");
@@ -32,10 +34,10 @@ public class StopCommand extends BotCommand {
         SendMessage message = new SendMessage();
         message.setChatId(chat.getId());
 
-        if(BotConfig.USER_ID != user.getId())
+        if(config.USER_ID != user.getId())
             message.setText("Please enter your ID (/id) in the configuration to unlock this command.");
         else {
-            BotConfig.USER_ID = 0;
+            config.USER_ID = 0;
             message.setText("Bye. Bye. I removed your ID from the configuration. Add it again so you can use the commands.");
         }
         try
