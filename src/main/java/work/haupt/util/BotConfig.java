@@ -1,9 +1,11 @@
 package work.haupt.util;
 
-public class BotConfig {
+import org.aeonbits.owner.Config;
 
-    public static final String COMMANDS_TOKEN = "";
-    public static final String COMMANDS_USER = "";
-    public static int USER_ID = ;
-    public static String USERNAME = "";
+public class BotConfig implements Config {
+
+    public String COMMANDS_TOKEN;
+    public String COMMANDS_USER;
+    public int USER_ID;
+    public String USERNAME;
 }

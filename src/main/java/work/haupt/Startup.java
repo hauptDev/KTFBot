@@ -1,5 +1,6 @@
 package work.haupt;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -14,6 +15,7 @@ public class Startup {
 
     private static final String LOGTAG = "MAIN";
 
+    private static BotConfig config = ConfigFactory.create(BotConfig.class);
     public static TelegramBotsApi telegramBotsApi;
 
     public static void main(String[] args) {
@@ -25,7 +27,7 @@ public class Startup {
             ApiContextInitializer.init();
             telegramBotsApi = new TelegramBotsApi();
             try {
-                telegramBotsApi.registerBot(new CommandsHandler(BotConfig.COMMANDS_USER));
+                telegramBotsApi.registerBot(new CommandsHandler(config.COMMANDS_USER));
             } catch (TelegramApiException e) {
                 BotLogger.error(LOGTAG, e);
             }

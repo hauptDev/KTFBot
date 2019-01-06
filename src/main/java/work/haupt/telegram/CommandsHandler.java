@@ -1,5 +1,6 @@
 package work.haupt.telegram;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -19,6 +20,7 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
 
     public static final String LOGTAG = "COMMANDSHANDLER";
 
+    private static BotConfig config = ConfigFactory.create(BotConfig.class);
     private MessageHandler messageHandler = new MessageHandler();
 
     public CommandsHandler(String botUsername)
@@ -56,7 +58,7 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
             try {
                 if (MessageContainer.chatMessageQueue.peek() != null) {
                     SendMessage message = new SendMessage();
-                    message.setChatId((long) BotConfig.USER_ID);
+                    message.setChatId((long) config.USER_ID);
                     message.setText(MessageContainer.chatMessageQueue.poll().getMessage());
                     execute(message);
                 }
@@ -73,6 +75,6 @@ public class CommandsHandler extends TelegramLongPollingCommandBot {
 
     @Override
     public String getBotToken() {
-        return BotConfig.COMMANDS_TOKEN;
+        return config.COMMANDS_TOKEN;
     }
 }

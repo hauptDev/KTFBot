@@ -21,6 +21,7 @@ jar {
 }
 
 dependencies {
+    implementation group: 'org.aeonbits.owner', name: 'owner', version: '1.0.10'
     compile group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.33'
     compile group: 'org.seleniumhq.selenium', name: 'htmlunit-driver', version: '2.33.3'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.141.59'

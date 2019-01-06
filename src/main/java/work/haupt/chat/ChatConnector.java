@@ -1,5 +1,6 @@
 package work.haupt.chat;
 
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -16,7 +17,7 @@ public class ChatConnector implements Runnable {
 
     // Declare and initiate our logger to log on different log levels.
     public static final String LOGTAG = "CHATCONNECTOR";
-
+    private static BotConfig config = ConfigFactory.create(BotConfig.class);
     // Declare and initiate a few static strings that we need and don't want to put somewhere in the logic
     private static final String URL = "http://kt-forum.de/chat/";
     private static final String USERNAME = "Oni";
@@ -130,7 +131,7 @@ public class ChatConnector implements Runnable {
         try {
             element = driver.findElement(By.id("ajaxChat_m_" + (lastMessageId +1)));
             lastMessageId = getMessageId(element);
-            if(element.getText().contains(BotConfig.USERNAME + ": "))
+            if(element.getText().contains(config.USERNAME + ": "))
                 return;
             MessageContainer.chatMessageQueue.offer(new ChatMessage(element.getText()));
         } catch(NoSuchElementException exception)
