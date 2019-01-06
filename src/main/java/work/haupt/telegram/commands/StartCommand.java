@@ -35,7 +35,7 @@ public class StartCommand extends BotCommand {
         {
             try
             {
-                if(!arguments[0].equals("ktfbot2019"))
+                if(!arguments[0].equals(config.BOT_ACCESS_PASSWORD))
                 {
                     BotLogger.warn(LOGTAG, String.format("%s tried to login with a wrong password: %s", user.getUserName(), arguments[0]));
                 }

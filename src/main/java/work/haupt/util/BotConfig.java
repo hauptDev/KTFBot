@@ -8,4 +8,6 @@ public class BotConfig implements Config {
     public String COMMANDS_USER;
     public int USER_ID;
     public String USERNAME;
+    public String PASSWORD;
+    public String BOT_ACCESS_PASSWORD;
 }

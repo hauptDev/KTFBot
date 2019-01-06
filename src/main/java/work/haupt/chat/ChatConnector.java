@@ -20,9 +20,9 @@ public class ChatConnector implements Runnable {
     private static BotConfig config = ConfigFactory.create(BotConfig.class);
     // Declare and initiate a few static strings that we need and don't want to put somewhere in the logic
     private static final String URL = "http://kt-forum.de/chat/";
-    private static final String USERNAME = "Oni";
+    private static final String USERNAME = config.USERNAME;
     private static final String USERNAMEFIELD = "userNameField";
-    private static final String PASSWORD = "5TN2DC1N59MQ8";
+    private static final String PASSWORD = config.PASSWORD;
     private static final String PASSWORDFIELD = "passwordField";
     private static final String LOGINBUTTON = "loginButton";
     private static final String LOGOUTBUTTON = "logoutButton";
